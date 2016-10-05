@@ -33,4 +33,12 @@ public class TestLengthLib {
 
         assertNotEquals(true, length_1.equals(length_2));
     }
+
+    @Test
+    public void shouldReturnFalseWhen_1m_100cm() {
+        LengthLib length_1 = new LengthLib(1, "m");
+        LengthLib length_2 = new LengthLib(100, "cm");
+
+        assertEquals(true, length_1.equals(length_2));
+    }
 }

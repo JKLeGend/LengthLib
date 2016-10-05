@@ -16,7 +16,14 @@ public class LengthLib {
         return this.value;
     }
 
+    public String getUnit() {
+        return this.unit;
+    }
+
     public boolean equals(LengthLib length) {
-        return this.value == length.getValue();
+        double convertValue = length.getValue();
+        if("cm" == length.getUnit())
+            convertValue = convertValue / 100;
+        return this.value == convertValue;
     }
 }
