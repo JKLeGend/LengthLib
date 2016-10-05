@@ -32,4 +32,13 @@ public class LengthLib {
         length.unify();
         return (this.value == length.getValue());
     }
+
+    public LengthLib plus(LengthLib length) {
+        this.unify();
+        length.unify();
+        LengthLib lengthLib = new LengthLib(new LengthFactory());
+        LengthLib plusLength = lengthLib.createLength(this.value + length.getValue(), "mm");
+
+        return plusLength;
+    }
 }
