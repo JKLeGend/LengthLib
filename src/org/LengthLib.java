@@ -4,26 +4,32 @@ package org;
  * Created by jukzhang on 10/5/16.
  */
 public class LengthLib {
-    private double value;
-    private String unit;
+    double value;
+    String unit;
+    double unifyFactor;
+    LengthFactory length;
 
-    public LengthLib(double value, String unit) {
-        this.value = value;
-        this.unit = unit;
+    public LengthLib() {}
+
+    public LengthLib(LengthFactory length) {
+        this.length = length;
+    }
+
+    public LengthLib createLength(double value, String unit) {
+        return length.createLength(value, unit);
     }
 
     public double getValue() {
         return this.value;
     }
 
-    public String getUnit() {
-        return this.unit;
+    public void unify(){
+        this.value = this.value * this.unifyFactor;
     }
 
     public boolean equals(LengthLib length) {
-        double convertValue = length.getValue();
-        if("cm" == length.getUnit())
-            convertValue = convertValue / 100;
-        return this.value == convertValue;
+        this.unify();
+        length.unify();
+        return (this.value == length.getValue());
     }
 }
