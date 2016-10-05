@@ -15,4 +15,8 @@ public class LengthLib {
     public double getValue() {
         return this.value;
     }
+
+    public boolean equals(LengthLib length) {
+        return this.value == length.getValue();
+    }
 }
