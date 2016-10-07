@@ -46,7 +46,7 @@ public class TestLengthLib {
     }
 
     @Test
-    public void shouldReturnFalseWhen_1m_100cm() {
+    public void shouldReturnTrueWhen_1m_100cm() {
         Meter meter_1 = (Meter) length.createLength(1, "m");
         CentiMeter centiMeter_100 = (CentiMeter) length.createLength(100, "cm");
 
@@ -54,7 +54,7 @@ public class TestLengthLib {
     }
 
     @Test
-    public void shouldReturnFalseWhen_1cm_10mm() {
+    public void shouldReturnTrueWhen_1cm_10mm() {
         CentiMeter centiMeter_1 = (CentiMeter) length.createLength(1, "cm");
         MilliMeter milliMeter_10 = (MilliMeter) length.createLength(10, "mm");
 
@@ -62,7 +62,7 @@ public class TestLengthLib {
     }
 
     @Test
-    public void shouldReturnFalseWhen_1km_100000cm() {
+    public void shouldReturnTrueWhen_1km_100000cm() {
         KiloMeter kiloMeter_1 = (KiloMeter) length.createLength(1, "km");
         CentiMeter centiMeter_100000 = (CentiMeter) length.createLength(100000, "cm");
 
@@ -188,6 +188,19 @@ public class TestLengthLib {
         } catch (CanNotDivZero e) {}
 
         assertEquals(4.285714, result, PRECISION);
+    }
+
+    @Test
+    public void shouldReturnCorrectAnswer() {
+        Meter meter_1 = (Meter) length.createLength(1, "m");
+        CentiMeter centiMeter_10 = (CentiMeter) length.createLength(10, "cm");
+        MilliMeter milliMeter_5 = (MilliMeter) length.createLength(5, "mm");
+        double result = 0;
+        try {
+            result = meter_1.divide(4).plus(centiMeter_10.multiply(3)).minus(milliMeter_5).getValue();
+        } catch (CanNotDivZero e) {}
+
+        assertEquals(545, result, PRECISION);
     }
 }
 
