@@ -1,3 +1,4 @@
+import err.CanNotDivZero;
 import org.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by jukzhang on 10/5/16.
  */
+
 public class TestLengthLib {
     public static final double PRECISION = 0.000001;
     LengthFactory lengthFactory;
@@ -158,6 +160,34 @@ public class TestLengthLib {
         CentiMeter centiMeter_1 = (CentiMeter) length.createLength(1.5, "cm");
 
         assertEquals(52.5, centiMeter_1.multiply(3.5).getValue(), PRECISION);
+    }
+
+    @Test(expected = CanNotDivZero.class)
+    public void shouldThrowExceptionWhen_1m_divide_0() throws Exception{
+        Meter meter_1 = (Meter) length.createLength(1, "m");
+        meter_1.divide(0).getValue();
+    }
+
+    @Test
+    public void shouldReturn3000When_1m_divide_3() {
+        Meter meter_1 = (Meter) length.createLength(1, "m");
+        double result = 0;
+        try {
+            result = meter_1.divide(3).getValue();
+        } catch (CanNotDivZero e) {}
+
+        assertEquals(333.333333, result, PRECISION);
+    }
+
+    @Test
+    public void shouldReturn3000When_1dot5cm_divide_3dot5() {
+        CentiMeter centiMeter_1 = (CentiMeter) length.createLength(1.5, "cm");
+        double result = 0;
+        try {
+            result = centiMeter_1.divide(3.5).getValue();
+        } catch (CanNotDivZero e) {}
+
+        assertEquals(4.285714, result, PRECISION);
     }
 }
 

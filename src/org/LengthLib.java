@@ -1,5 +1,7 @@
 package org;
 
+import err.CanNotDivZero;
+
 /**
  * Created by jukzhang on 10/5/16.
  */
@@ -57,5 +59,17 @@ public class LengthLib {
         LengthLib multiplyLength = lengthLib.createLength(this.value * num, "mm");
 
         return multiplyLength;
+    }
+
+    public LengthLib divide(double num) throws CanNotDivZero {
+        if(0 == num) {
+            throw new CanNotDivZero("sorry, you can not divide 0.");
+        }
+
+        this.unify();
+        LengthLib lengthLib = new LengthLib(new LengthFactory());
+        LengthLib divideLength = lengthLib.createLength(this.value / num, "mm");
+
+        return divideLength;
     }
 }
