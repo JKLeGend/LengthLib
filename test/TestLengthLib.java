@@ -102,4 +102,40 @@ public class TestLengthLib {
 
         assertEquals(1001011, resultLength.getValue(), PRECISION);
     }
+
+    @Test
+    public void shouldReturn_1000When_1m_minus_2m() {
+        Meter meter_1 = (Meter) length.createLength(1, "m");
+        Meter meter_2 = (Meter) length.createLength(2, "m");
+
+        assertEquals(-1000, meter_1.minus(meter_2).getValue(), PRECISION);
+    }
+
+    @Test
+    public void shouldReturn800When_1m_minus_20cm() {
+        Meter meter_1 = (Meter) length.createLength(1, "m");
+        CentiMeter centiMeter_20 = (CentiMeter) length.createLength(20, "cm");
+
+        assertEquals(800, meter_1.minus(centiMeter_20).getValue(), PRECISION);
+    }
+
+    @Test
+    public void shouldReturn999998When_1km_minus_2mm() {
+        KiloMeter kiloMeter_1 = (KiloMeter) length.createLength(1, "km");
+        MilliMeter milliMeter_2 = (MilliMeter) length.createLength(2, "mm");
+
+        assertEquals(999998, kiloMeter_1.minus(milliMeter_2).getValue(), PRECISION);
+    }
+
+    @Test
+    public void shouldReturn998989When_minus_1km_1m_1cm_1mm() {
+        KiloMeter kiloMeter_1 = (KiloMeter) length.createLength(1, "km");
+        Meter meter_1 = (Meter) length.createLength(1, "m");
+        CentiMeter centiMeter_1 = (CentiMeter) length.createLength(1, "cm");
+        MilliMeter milliMeter_1 = (MilliMeter) length.createLength(1, "mm");
+
+        LengthLib resultLength = kiloMeter_1.minus(meter_1).minus(centiMeter_1).minus(milliMeter_1);
+
+        assertEquals(998989, resultLength.getValue(), PRECISION);
+    }
 }

@@ -20,7 +20,7 @@
 3.四则运算
   -plus
   -minus
-  -multify
+  -multiply
    -unit
 
 

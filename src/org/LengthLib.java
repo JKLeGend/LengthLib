@@ -41,4 +41,13 @@ public class LengthLib {
 
         return plusLength;
     }
+
+    public LengthLib minus(LengthLib length) {
+        this.unify();
+        length.unify();
+        LengthLib lengthLib = new LengthLib(new LengthFactory());
+        LengthLib minusLength = lengthLib.createLength(this.value - length.getValue(), "mm");
+
+        return minusLength;
+    }
 }
