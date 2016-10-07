@@ -50,4 +50,12 @@ public class LengthLib {
 
         return minusLength;
     }
+
+    public LengthLib multiply(double num) {
+        this.unify();
+        LengthLib lengthLib = new LengthLib(new LengthFactory());
+        LengthLib multiplyLength = lengthLib.createLength(this.value * num, "mm");
+
+        return multiplyLength;
+    }
 }

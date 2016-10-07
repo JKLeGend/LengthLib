@@ -138,4 +138,26 @@ public class TestLengthLib {
 
         assertEquals(998989, resultLength.getValue(), PRECISION);
     }
+
+    @Test
+    public void shouldReturn0When_1m_multiply_0() {
+        Meter meter_1 = (Meter) length.createLength(1, "m");
+
+        assertEquals(0, meter_1.multiply(0).getValue(), PRECISION);
+    }
+
+    @Test
+    public void shouldReturn3000When_1m_multiply_3() {
+        Meter meter_1 = (Meter) length.createLength(1, "m");
+
+        assertEquals(3000, meter_1.multiply(3).getValue(), PRECISION);
+    }
+
+    @Test
+    public void shouldReturn3000When_1dot5cm_multiply_3dot5() {
+        CentiMeter centiMeter_1 = (CentiMeter) length.createLength(1.5, "cm");
+
+        assertEquals(52.5, centiMeter_1.multiply(3.5).getValue(), PRECISION);
+    }
 }
+
